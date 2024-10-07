@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RepasoAPI.Models;
 
 [Table("categories")]
-public class Category(string name, string categoryType)
+public class Category
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,9 +13,19 @@ public class Category(string name, string categoryType)
 
     [MaxLength(100)]
     [Column("name")]
-    public required string Name { get; set; } = name;
+    public required string Name { get; set; }
 
     [MaxLength(100)]
     [Column("category_type")]
-    public required string CategoryType { get; set; } = categoryType;
+    public required string CategoryType { get; set; }
+
+    public Category(string name, string categoryType)
+    {
+        Name = name.ToLower().Trim();
+        CategoryType = categoryType.ToLower().Trim();
+    }
+
+    public Category()
+    {
+    }
 }

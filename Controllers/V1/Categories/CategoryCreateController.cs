@@ -1,33 +1,41 @@
-// using Microsoft.AspNetCore.Mvc;
-// using RepasoAPI.Data;
-// using RepasoAPI.DTOs.Requests;
-// using RepasoAPI.Models;
-// using RepasoAPI.Repositories;
-// using RepasoAPI.Services;
+using Microsoft.AspNetCore.Mvc;
+using RepasoAPI.Data;
+using RepasoAPI.DTOs.Requests;
+using RepasoAPI.Models;
+using RepasoAPI.Repositories;
+using RepasoAPI.Services;
 
-// namespace RepasoAPI.Controllers.V1.Categories;
+namespace RepasoAPI.Controllers.V1.Categories;
 
-// [ApiController]
-// [Route("api/v1/category")]
-// public class CategoryCreateController(ICategoryRepository categoryRepository) : CategoryController(categoryRepository)
-// {
-//     [HttpPost]
-    // public async Task<ActionResult<Category>> Create(CategoryDTO categoryDTO)
-    // {
-        // if (!ModelState.IsValid)
-        // {
-        //     return BadRequest(ModelState);
-        // }
+[ApiController]
+[Route("api/v1/category")]
+public class CategoryCreateController : CategoryController
+{
+    public CategoryCreateController(ICategoryRepository categoryRepository) : base(categoryRepository)
+    {
+    }
 
-        // if (string.IsNullOrEmpty(categoryDTO.Name))
-        // {
-        //     return BadRequest("Category Name is required.");
-        // }
+    [HttpPost]
+    public async Task<ActionResult<Category>> CreateCategory(CategoryDTO categoryDTO)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
 
-        // var newCategory = new Category(categoryDTO.Name, categoryDTO.CategoryType);
+        if (string.IsNullOrEmpty(categoryDTO.Name))
+        {
+            return BadRequest("Category Name is required.");
+        }
 
-        // await _categoryRepository.Add(newCategory);
+        var newCategory = new Category
+        {
+            Name = categoryDTO.Name,
+            CategoryType = categoryDTO.CategoryType
+        };
 
-        // return Ok(newCategory);
-    // }
-// }
+        await _categoryRepository.Add(newCategory);
+
+        return Ok(newCategory);
+    }
+}

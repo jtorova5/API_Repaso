@@ -11,6 +11,5 @@ public class CategoryDTO
 
     [Required(ErrorMessage = "Category type must be provided")]
     [MaxLength(50, ErrorMessage = "Category type must be at most 50 characters")]
-    [MinLength(3, ErrorMessage = "Category type must be at least 3 characters")] 
     public required string CategoryType { get; set; }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RepasoAPI.Models;
 
 [Table("customers")]
-public class Customer(string userName, string email, string password)
+public class Customer
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,14 +13,25 @@ public class Customer(string userName, string email, string password)
 
     [MaxLength(100)]
     [Column("name")]
-    public required string UserName { get; set; } = userName.ToLower().Trim();
+    public required string UserName { get; set; }
 
     [MaxLength(100)]
     [Column("email")]
     [EmailAddress]
-    public required string Email { get; set; } = email.ToLower().Trim();
+    public required string Email { get; set; }
 
     [MaxLength(256)]
     [Column("password")]
-    public required string Password { get; set; } = password.ToLower().Trim();
+    public required string Password { get; set; }
+
+    public Customer(string userName, string email, string password)
+    {
+        UserName = userName.ToLower().Trim();
+        Email = email.ToLower().Trim();
+        Password = password.ToLower().Trim();
+    }
+    
+    public Customer()
+    {
+    }
 }
