@@ -1,6 +1,8 @@
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using RepasoAPI.Data;
+using RepasoAPI.Repositories;
+using RepasoAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,11 @@ var conectionDB = $"server={dbHost};port={dbPort};database={dbDatabaseName};uid=
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(conectionDB, ServerVersion.Parse("8.0.20-mysql"))
 );
+
+builder.Services.AddScoped<ICategoryRepository, CategoryServices>();
+builder.Services.AddScoped<ICustomerRepository, CustomerServices>();
+builder.Services.AddScoped<IOrderRepository, OrderServices>();
+builder.Services.AddScoped<IProductRepository, ProductServices>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
