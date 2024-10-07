@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepasoAPI.Models;
 
-[Table("customer")]
+[Table("customers")]
 public class Customer(string userName, string email, string password)
 {
     [Key]
