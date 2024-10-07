@@ -7,7 +7,7 @@ namespace RepasoAPI.Services;
 
 public class CustomerServices(AppDbContext context) : ICustomerRepository
 {
-    private readonly AppDbContext _context = context;
+    protected readonly AppDbContext _context = context;
 
     public async Task AddCustomer(Customer customer)
     {
