@@ -13,7 +13,7 @@ public class OrderServices(AppDbContext context) : IOrderRepository
     {
         if (order == null)
         {
-            throw new ArgumentNullException(nameof(order), "Category cannot be null");
+            throw new ArgumentNullException(nameof(order), "Order cannot be null");
         }
 
         try
