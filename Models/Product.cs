@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RepasoAPI.Models;
 
 [Table("products")]
-public class Products(string productName)
+public class Product(string productName)
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -15,7 +15,7 @@ public class Products(string productName)
     [Column("product_name")]
     public required string ProductName { get; set; } = productName.ToLower().Trim();
 
-    [ForeignKey("cattegories")]
+    [ForeignKey("categories")]
     [Column("category_id")]
     public int CategoryId { get; set; }
 }
